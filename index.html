@@ -15,8 +15,10 @@
 <script>
 var map = L.map('map').setView([0, 0], 1);
 
-// Load the JSON file
-var data = JSON.parse('your_file.json');
+// Fetch the JSON file
+const response = await fetch('https://nimr1.github.io/Game2/your_file.json');
+
+const data = await response.json();
 
 // Create the map layer
 var layer = L.geoJSON(data, {
@@ -34,21 +36,6 @@ var layer = L.geoJSON(data, {
 
 // Add the layer to the map
 map.addLayer(layer);
-
-function loadJSONFile(file) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", file, true);
-  xhr.responseType = "json";
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      var data = xhr.response;
-      return data;
-    } else {
-      console.log("Error loading JSON file: " + xhr.status);
-    }
-  };
-  xhr.send();
-}
 </script>
 </body>
 </html>
